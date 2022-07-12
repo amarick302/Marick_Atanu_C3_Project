@@ -9,6 +9,7 @@ public class Restaurant {
     public LocalTime openingTime;
     public LocalTime closingTime;
     private List<Item> menu = new ArrayList<Item>();
+    List<Item> orderedList=new ArrayList<>();
 
     public Restaurant(String name, String location, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
@@ -68,6 +69,19 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+    public void orderItems(String[] listOfItemNames) throws itemNotFoundException {
+        for(String foodName:listOfItemNames) {
+            orderedList.add(findItemByName(foodName));
+        }
+    }
+
+    public int totalOrderValue() {
+        int sum=0;
+        for(Item item:orderedList){
+            sum+=item.getPrice();
+        }
+        return sum;
     }
 
 }

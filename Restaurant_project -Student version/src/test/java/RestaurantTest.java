@@ -84,18 +84,27 @@ class RestaurantTest {
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     //<<<<<<<<<<<<<<<<<<<<<Check Order>>>>>>>>>>>>>>>>>>>>>>>>
     @Test
-    public void check_whether_selected_items_successfully_selected(){
+    public void check_whether_selected_items_successfully_selected() throws itemNotFoundException {
         restaurant.addToMenu("Sweet corn soup",119);
         String []arr={"Sweet corn soup"};
         restaurant.orderItems(arr);
         assertEquals("Sweet corn soup",restaurant.orderedList.get(0).getName());
     }
     @Test
-    public void check_order_value(){
-        restaurant.addToMenu("Sweet corn soup",119);
+    public void check_order_value() throws itemNotFoundException {
         String []arr={"Sweet corn soup"};
         restaurant.orderItems(arr);
         assertEquals(119,restaurant.totalOrderValue());
+    }
+    @Test
+    public void should_throw_error_if_item_not_present_in_the_menu() throws itemNotFoundException {
+        String arr[]={"ABC"};
+        assertThrows(itemNotFoundException.class,()->restaurant.orderItems(arr));
+    }
+    @Test
+    public void should_not_throw_error_if_item_present_in_the_menu() throws itemNotFoundException {
+        String arr[]={"Sweet corn soup"};
+        assertDoesNotThrow(()->restaurant.orderItems(arr));
     }
     //<<<<<<<<<<<<<<<<<<<<<Check Order>>>>>>>>>>>>>>>>>>>>>>>>
 }
