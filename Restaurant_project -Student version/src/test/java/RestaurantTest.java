@@ -82,4 +82,20 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //<<<<<<<<<<<<<<<<<<<<<Check Order>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void check_whether_selected_items_successfully_selected(){
+        restaurant.addToMenu("Sweet corn soup",119);
+        String []arr={"Sweet corn soup"};
+        restaurant.orderItems(arr);
+        assertEquals("Sweet corn soup",restaurant.orderedList.get(0).getName());
+    }
+    @Test
+    public void check_order_value(){
+        restaurant.addToMenu("Sweet corn soup",119);
+        String []arr={"Sweet corn soup"};
+        restaurant.orderItems(arr);
+        assertEquals(119,restaurant.totalOrderValue());
+    }
+    //<<<<<<<<<<<<<<<<<<<<<Check Order>>>>>>>>>>>>>>>>>>>>>>>>
 }
